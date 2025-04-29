@@ -2,9 +2,14 @@ package com.example.demo.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.example.demo.models.MovieThumbnail;
+import java.util.List;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping
@@ -12,11 +17,18 @@ public class HomeController {
     
     @GetMapping
     public ModelAndView page(@RequestParam(name = "error", required = false) String error) {
-        ModelAndView home = new ModelAndView("hello");
+        ModelAndView home = new ModelAndView("home");
 
-        String message = "test fast refresh";
-        home.addObject("message", message);
+        MovieThumbnail thumbnail1 = new MovieThumbnail("1", "Pulp Fiction", "1994", "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg",4.32);
+        MovieThumbnail thumbnail2 = new MovieThumbnail("2", "Pulp Fiction", "1994", "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg",4.32);
+        MovieThumbnail thumbnail3 = new MovieThumbnail("3", "Pulp Fiction", "1994", "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg",4.32);
+        List<MovieThumbnail> thumbnailList = new ArrayList<>();
+        thumbnailList.add(thumbnail1);
+        thumbnailList.add(thumbnail2);
+        thumbnailList.add(thumbnail3);
+        home.addObject("thumbnail", thumbnailList);
 
         return home;
     }
+
 }

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import com.example.demo.models.Movie;
 
 import java.util.List;
@@ -29,6 +31,13 @@ public class MovieController {
 
         return movie;
     }
+    @PostMapping("/{movieId}/createreview")
+    public String testForm(@PathVariable("movieId") String movieId, @RequestParam(name="score")int score,@RequestParam(name="review")String reviewContents) {
+        
+        System.out.println(score);
+        System.out.println(reviewContents);
+        
+        return "redirect:/movie/" + movieId;
+    }
 }
-
 
