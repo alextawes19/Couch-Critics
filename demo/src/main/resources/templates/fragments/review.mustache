@@ -1,0 +1,9 @@
+<div class="placedReviewContainer">
+    <p>Score: {{score}}/5</p>
+    <p>{{reviewText}}</p>
+    {{#hasComments}}
+    <a href = "/review/{{reviewId}}">View Comments ({{commentCount}})</a>
+    {{/hasComments}}
+    <div class="smallSeparator"></div>
+    
+</div>

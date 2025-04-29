@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.models.Movie;
+import com.example.demo.models.Review;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -24,10 +25,17 @@ public class MovieController {
 
         List<String> genres = new ArrayList<>(Arrays.asList("Crime","Drama"));
         List<String> actors = new ArrayList<>(Arrays.asList("John Travolta","Uma Thurman","Samuel L. Jackson","Bruce Willis"));
-        Movie test = new Movie("1","Pulp Fiction","154 min","1994","A","The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",genres,actors,"Quentin Tarantino","https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg");
-
+        Movie test = new Movie("1","Pulp Fiction","154 min","1994","A","The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",genres,actors,"Quentin Tarantino","https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg", false);
 
         movie.addObject("placeholder", test);
+
+        List<Review> reviewList = new ArrayList<>();
+        Review review1 = new Review("1", "1", "1", "4/29/25 5:40pm", "God this movie is shit", 1, false, 0);
+        Review review2 = new Review("2", "1", "1", "4/29/25 6:40pm", "slkfdmkmmmmmkmkmkmka;kmdklfamd;flkamsfl;kdmflkadfnmasdjklnvdfjkbnsfkdjbnfkjvnsfdjklvnsdfkjlvnsdfkjlvnsdfkbjnsdfgkbjnsdfjkbnsdfjkbnfsdgjkbnsdfjkvnsfdkbjlnsdfkjvnsdfjkbnsdfjknsdfkjbnsdfkjbnskdfgjbnsdfkljbnsdjkfbnsdfkjbnsdfjkbnsfgjkbnskdfjvnafkljbnsfgkjbnafklvjnsgkbjnsdfkbjlns jkbnsdf jkbnsdfkjbnsd kfjn sdfjkbnsdf jklbnsdjkf nbsdfkjbnsdfjklbnsdfkjlbnadfkj", 1, true, 3);
+        reviewList.add(review1);
+        reviewList.add(review2);
+
+        movie.addObject("reviews", reviewList);
 
         return movie;
     }

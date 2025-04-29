@@ -34,7 +34,10 @@ public class Movie {
     //Url to the movie poster
     private final String posterUrl;
 
-    public Movie(String movieId, String title, String runtime, String year, String rating, String description, List<String> genres, List<String> actors, String director, String posterUrl) {
+    //Whether the current user has the movie saved
+    private final boolean isSaved;
+
+    public Movie(String movieId, String title, String runtime, String year, String rating, String description, List<String> genres, List<String> actors, String director, String posterUrl, boolean isSaved) {
         this.movieId = movieId;
         this.title = title;
         this.runtime = runtime;
@@ -45,6 +48,7 @@ public class Movie {
         this.actors = actors;
         this.director = director;
         this.posterUrl = posterUrl; 
+        this.isSaved = isSaved;
     }
 
     public String getMovieId() {

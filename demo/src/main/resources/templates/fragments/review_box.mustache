@@ -14,5 +14,11 @@
             <textarea name="review" class="reviewBox"></textarea>
             <button type="submit">Submit</button>
         </form>
+        <div class="bigSeparator"></div>
+        <h2>Reviews: </h2>
+        <div class="smallSeparator"></div>
+        {{#reviews}}
+        {{> fragments/review}}
+        {{/reviews}}
     </div>
 </div>
