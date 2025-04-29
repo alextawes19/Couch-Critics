@@ -1,0 +1,105 @@
+html {
+    width:100%;
+    height:100%;
+}
+
+body {
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(175, 175, 175);
+}
+
+
+.navbar{
+    width: 100%;
+    height: 80px;
+    background-color: rgb(44, 44, 44);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.navbarLinks {
+    grid-column: 1 / span 2;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.navbarAnchor {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+}
+
+.navbarLogin {
+    grid-column: 5 / span 1;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding-right: 70px;
+}
+
+.movieContainer {
+
+    display:flex;
+    justify-content: center;
+    align-items: start;
+    width:auto;
+    flex-grow:1;
+    gap: 100px;
+    margin-top: 75px;
+}
+
+.posterContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.posterContainer img {
+    border: solid;
+    border-radius: 5px;
+    border-color: rgb(122, 122, 122);
+    border-width: 2px;
+}
+
+.movieDetails {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.movieDetails h1 {
+    margin-top: 0px;
+}
+
+.detailsSubDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 30px;
+}
+
+.genre {
+
+}
+
+.people {
+    
+}
+
+li {
+    list-style-type: none;
+    margin-top:10px;
+    margin-left:20px;
+
+}
+
+.genre p {
+    margin-top: 36px;
+    font-size: 12px;
+}

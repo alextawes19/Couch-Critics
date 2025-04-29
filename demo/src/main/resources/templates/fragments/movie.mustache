@@ -1,0 +1,31 @@
+
+
+<div class="movieContainer">
+    <div class="posterContainer">
+      <img class="poster" src={{posterUrl}} height="350">
+    </div>
+    <div class="movieDetails">
+        <h1>
+            {{title}} ({{year}})
+        </h1>
+        <p>Runtime: {{runtime}}</p>
+        <p>Rating: {{rating}}</p>
+        <p>{{description}}</p>
+        <div class="detailsSubDiv">
+            <div class="genre">
+            Genre:  {{#genres}}
+                        <li>{{.}}</li>
+                    {{/genres}}
+            </div>
+            <div class="people">
+            Starring: {{#actors}}
+                        <li>{{.}}</li> 
+                    {{/actors}}
+            </div>
+            <div class="director">
+                Directed By: 
+                    <li>{{director}}</li>
+            </div>
+        </div>
+    </div>
+</div>
