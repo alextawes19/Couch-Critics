@@ -1,5 +1,5 @@
 -- Create Database 
-CREATE DATABASE couch_critics;
+CREATE DATABASE if NOT EXISTS couch_critics;
 
 -- Use database 
 use couch_critics;
@@ -46,6 +46,15 @@ CREATE TABLE Comment (
     commentText TEXT,
     FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE,
     FOREIGN KEY (reviewId) REFERENCES Review(reviewId) ON DELETE CASCADE
+);
+
+-- Create the Save table
+CREATE TABLE Save (
+    userId INT NOT NULL,
+    movieId INT NOT NULL,
+    PRIMARY KEY (userId, movieId),
+    FOREIGN KEY (userId) REFERENCES User(userId),
+    FOREIGN KEY (movieId) REFERENCES Movie(movieId)
 );
 
 -- Index for finding movies by title
