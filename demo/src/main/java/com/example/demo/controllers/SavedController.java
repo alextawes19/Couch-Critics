@@ -29,7 +29,7 @@ public class SavedController {
     }
 
     @PostMapping("/{movieId}")
-    public String testForm(@PathVariable("movieId") String movieId, @RequestParam(name="add")boolean add) {
+    public String save(@PathVariable("movieId") String movieId, @RequestParam(name="add")boolean add) {
         
         System.out.println(add);
         

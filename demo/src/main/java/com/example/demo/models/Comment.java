@@ -20,11 +20,9 @@ public class Comment {
         return commentId;
     }
 
-
     public String getCommentDate() {
         return commentDate;
     }
-
 
     public String getCommentText() {
         return commentText;
