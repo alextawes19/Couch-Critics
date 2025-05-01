@@ -1,11 +1,17 @@
 <div class="homeContainer">
     <div class="homeBackground">
         <div class="movieListTitle">
-            <h1>Movie List</h1>
+            <h1>{{pageTitle}}</h1>
         </div>
         <div class="movies">
             {{#thumbnail}}
             {{> fragments/movie_thumbnail}}
+            {{/thumbnail}}
+            {{^thumbnail}}
+            <div class="noMovies">
+                No Movies
+            </div>
+
             {{/thumbnail}}
         </div>
     </div>
