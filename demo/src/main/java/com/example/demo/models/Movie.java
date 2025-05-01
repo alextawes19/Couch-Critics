@@ -20,13 +20,10 @@ public class Movie {
     private final String rating; 
 
     //Description of the movie
-    private final String description;
+    private final String overview;
 
     //List of genres that apply to the movie
-    private final List<String> genres;
-
-    //Actors in the movie
-    private final List<String> actors;
+    private final String genre;
 
     //Director of the movie
     private final String director;
@@ -37,15 +34,14 @@ public class Movie {
     //Whether the current user has the movie saved
     private final boolean isSaved;
 
-    public Movie(String movieId, String title, String runtime, String year, String rating, String description, List<String> genres, List<String> actors, String director, String posterUrl, boolean isSaved) {
+    public Movie(String movieId, String title, String runtime, String year, String rating, String overview, String genre, String director, String posterUrl, boolean isSaved) {
         this.movieId = movieId;
         this.title = title;
         this.runtime = runtime;
         this.year = year;
         this.rating = rating;
-        this.description = description;
-        this.genres = genres;
-        this.actors = actors;
+        this.overview = overview;
+        this.genre = genre;
         this.director = director;
         this.posterUrl = posterUrl; 
         this.isSaved = isSaved;
@@ -70,16 +66,12 @@ public class Movie {
         return rating;
     }
 
-    public String getDescription() {
-        return description;
+    public String getOverview() {
+        return overview;
     }
 
-    public List<String> getGenres() {
-        return genres;
-    }
-
-    public List<String> getActors() {
-        return actors;
+    public String getGenres() {
+        return genre;
     }
 
     public String getDirector() {
@@ -88,5 +80,9 @@ public class Movie {
 
     public String getPosterUrl() {
         return posterUrl;
+    }
+
+    public boolean getIsSaved() {
+        return isSaved;
     }
 }
