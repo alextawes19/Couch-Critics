@@ -1,0 +1,11 @@
+<div class="clickedReviewContainer">
+    <div class="reviewBackground" id="clickedReviewBox">
+        {{#reviewObj}}
+            {{> fragments/review}}
+        {{/reviewObj}}
+        {{#comments}}
+            {{> fragments/comment}}
+            <div class="smallSeparator"></div>
+        {{/comments}}
+    </div>
+</div>

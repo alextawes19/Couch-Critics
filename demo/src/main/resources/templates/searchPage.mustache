@@ -7,8 +7,10 @@
 </head>
 <body>
     {{> fragments/navbar}}
-    {{> fragments/reviewWithComments}}
-    
+    {{> fragments/searchForm}}
+    <div class="resultContainer">
+    {{#results}}
+        {{> fragments/movie_thumbnail}}
+    {{/results}}
+    <div>
 </body>
-
-</html>

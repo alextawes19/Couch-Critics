@@ -10,22 +10,40 @@
         </h1>
         <p>Runtime: {{runtime}}</p>
         <p>Rating: {{rating}}</p>
-        <p>{{description}}</p>
+        <p>{{overview}}</p>
         <div class="detailsSubDiv">
             <div class="genre">
             Genre:  {{#genres}}
                         <li>{{.}}</li>
                     {{/genres}}
             </div>
-            <div class="people">
-            Starring: {{#actors}}
-                        <li>{{.}}</li> 
-                    {{/actors}}
-            </div>
+            
             <div class="director">
                 Directed By: 
                     <li>{{director}}</li>
             </div>
         </div>
+    </div>
+</div>
+<div class="movieButtons">
+    <div class="buttonBox">
+        <a href="/">Return Home</a>
+    </div>
+    <div class="buttonBox">
+        <form method="post" action="/savedMovies/{{movieId}}" class="saveForm">
+            {{#isSaved}}
+            <input name="add" value="false"/>
+            <button type="submit" class="transparent">
+                Unsave Movie
+            </button>
+            
+            {{/isSaved}}
+            {{^isSaved}}
+            <input name="add" value="true"/>
+            <button type="submit" class="transparent">
+                Save Movie
+            </button>
+            {{/isSaved}}
+        </form>
     </div>
 </div>
