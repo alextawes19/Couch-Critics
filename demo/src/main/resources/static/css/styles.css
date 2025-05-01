@@ -173,6 +173,7 @@ li {
     border-radius: 10px;
     padding: 30px 70px 50px 70px;
     background-color: rgb(216, 216, 216);
+    min-width: 700px;
 }
 
 .movieListTitle {
@@ -191,6 +192,13 @@ li {
     flex-direction: column;
     gap: 40px;
     justify-content: center;
+}
+
+.noMovies {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
 }
 
 .thumbnailContainer {
@@ -365,6 +373,31 @@ li {
     gap: 40px;
     justify-content: center;
     align-items: center;
+
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.userContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+.userSubContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    border: solid;
+    border-color: black;
+    border-radius: 10px;
+    padding: 30px 70px 50px 70px;
+    background-color: rgb(216, 216, 216);
+
 }
 
 .short-input {

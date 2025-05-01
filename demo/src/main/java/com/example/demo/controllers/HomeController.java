@@ -19,6 +19,9 @@ public class HomeController {
     public ModelAndView page(@RequestParam(name = "error", required = false) String error) {
         ModelAndView home = new ModelAndView("home");
 
+        String pageTitle = "Movie List";
+        home.addObject("pageTitle", pageTitle);
+
         MovieThumbnail thumbnail1 = new MovieThumbnail("1", "Pulp Fiction", "1994", "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg",4.32);
         MovieThumbnail thumbnail2 = new MovieThumbnail("2", "Pulp Fiction", "1994", "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg",4.32);
         MovieThumbnail thumbnail3 = new MovieThumbnail("3", "Pulp Fiction", "1994", "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg",4.32);

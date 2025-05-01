@@ -1,9 +1,10 @@
-
+<title>{{title}}</title>
 
 <div class="movieContainer">
     <div class="posterContainer">
       <img class="poster" src={{posterUrl}} height="350">
     </div>
+
     <div class="movieDetails">
         <h1>
             {{title}} ({{year}})
@@ -30,7 +31,7 @@
         <a href="/">Return Home</a>
     </div>
     <div class="buttonBox">
-        <form method="post" action="/savedMovies/{{movieId}}" class="saveForm">
+        <form method="post" action="/saved/{{movieId}}" class="saveForm">
             {{#isSaved}}
             <input name="add" value="false"/>
             <button type="submit" class="transparent">

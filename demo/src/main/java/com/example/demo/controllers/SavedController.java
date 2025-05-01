@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.models.Comment;
+import com.example.demo.models.MovieThumbnail;
 import com.example.demo.models.Review;
 import com.example.demo.models.Movie;
 import com.example.demo.services.SavedService;
@@ -35,6 +36,10 @@ public class SavedController {
     public ModelAndView page() {
         ModelAndView saved = new ModelAndView("savedPage");
 
+        String pageTitle = "Saved Movies";
+
+        saved.addObject("pageTitle", pageTitle);
+
         //Be sure to set has comments to false here
         
         try {
@@ -56,6 +61,7 @@ public class SavedController {
         return saved;
     }
 
+    //Save a movie
     @PostMapping("/{movieId}")
     public String save(@PathVariable("movieId") String movieId, @RequestParam(name="add")boolean add) {
         
