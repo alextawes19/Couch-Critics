@@ -61,6 +61,7 @@ public class SavedController {
         return saved;
     }
 
+    //Save a movie
     @PostMapping("/{movieId}")
     public String save(@PathVariable("movieId") String movieId, @RequestParam(name="add")boolean add) {
         
