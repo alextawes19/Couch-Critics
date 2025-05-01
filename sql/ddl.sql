@@ -19,7 +19,7 @@ CREATE TABLE Movie (
     title VARCHAR(255) NOT NULL,
     overview TEXT,
     posterLink TEXT,
-    runtime INT,
+    runtime VARCHAR(20),
     genre VARCHAR(100),
     director VARCHAR(100),
     year INT

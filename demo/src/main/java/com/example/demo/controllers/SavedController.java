@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +15,22 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.models.Comment;
 import com.example.demo.models.MovieThumbnail;
 import com.example.demo.models.Review;
+import com.example.demo.models.Movie;
+import com.example.demo.services.SavedService;
+import com.example.demo.services.UserService;
 
 @Controller
-@RequestMapping("/savedMovies")
+@RequestMapping("/saved")
 public class SavedController {
+
+    private final SavedService savedService;
+    private final UserService userService;
+
+    @Autowired
+    public SavedController(SavedService savedService, UserService userService) {
+        this.savedService = savedService;
+        this.userService = userService;
+    }
 
     @GetMapping
     public ModelAndView page() {
@@ -28,15 +41,22 @@ public class SavedController {
         saved.addObject("pageTitle", pageTitle);
 
         //Be sure to set has comments to false here
-        MovieThumbnail thumbnail1 = new MovieThumbnail("1", "Pulp Fiction", "1994", "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg",4.32);
-        MovieThumbnail thumbnail2 = new MovieThumbnail("2", "Pulp Fiction", "1994", "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg",4.32);
-        MovieThumbnail thumbnail3 = new MovieThumbnail("3", "Pulp Fiction", "1994", "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg",4.32);
-        List<MovieThumbnail> thumbnailList = new ArrayList<>();
-        thumbnailList.add(thumbnail1);
-        thumbnailList.add(thumbnail2);
-        thumbnailList.add(thumbnail3);
+        
+        try {
+            // Render saved movies for current user
+            String currentUserId = userService.getLoggedInUser().getUserId();
+            List<Movie> movies = savedService.getSavedMovies(currentUserId);
+            saved.addObject("movies", movies);
 
-        saved.addObject("thumbnail", thumbnailList);
+            // No content message
+            if (movies.isEmpty()) {
+                saved.addObject("isNoContent", true);
+            }
+        } catch (Exception e) {
+            // If an error occured
+            String errorMessage = "Some error occured!";
+            saved.addObject("errorMessage", errorMessage);
+        }
 
         return saved;
     }
