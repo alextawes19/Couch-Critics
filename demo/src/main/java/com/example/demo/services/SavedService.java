@@ -40,6 +40,12 @@ public class SavedService {
             try (ResultSet rs = stmt.executeQuery()) {
                 // Create movie objects to be displayed
                 while(rs.next()) {
+                    String imageLink;
+                    if (rs.getString("posterLink").equals("N/A") || rs.getString("posterLink").equals("")) {
+                        imageLink = "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
+                    } else {
+                        imageLink =rs.getString("posterLink");
+                    }
                     // Get movie information
                     String movieId = rs.getString("movieId");
                     String title = rs.getString("title");
@@ -48,7 +54,7 @@ public class SavedService {
                     String overview = rs.getString("overview");
                     String genre = rs.getString("genre");
                     String director = rs.getString("director");
-                    String posterUrl = rs.getString("posterLink");
+                    String posterUrl = imageLink;
 
                     String rating = "0";
 
