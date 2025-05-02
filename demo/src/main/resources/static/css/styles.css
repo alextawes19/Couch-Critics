@@ -216,6 +216,12 @@ li {
     border-color: black;
     color: black;
     box-shadow: 5px 5px 5px gray;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+.thumbnailContainer:hover {
+    box-shadow: 10px 10px 10px gray;
 }
 
 .thumbnailRating {
