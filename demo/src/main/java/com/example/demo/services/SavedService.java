@@ -26,7 +26,7 @@ public class SavedService {
 
     // Get the current user's saved movies
     public List<Movie> getSavedMovies(String currentUserId) {
-        System.out.println("Service: User is attempting to view saved movies");
+        System.out.println("SavedService: User is attempting to view saved movies");
         List<Movie> savedMovies = new ArrayList<>();
 
         // Query to get a user's saved movies
