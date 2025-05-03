@@ -2,9 +2,14 @@
     <p class="reviewItem">Score: {{score}}/5</p>
     <p id="date" class="reviewItem">{{reviewDate}}</p>
     <p class="reviewItem">{{reviewText}}</p>
-    {{#hasComments}}
-    <a href = "/review/{{reviewId}}">View Comments ({{commentCount}})</a>
-    {{/hasComments}}
+    {{^reviewPage}}
+        {{#hasComments}}
+            <a href = "/review/{{reviewId}}">View Comments ({{commentCount}})</a>
+        {{/hasComments}}
+        {{^hasComments}}
+            <a href = "/review/{{reviewId}}">Leave a Comment</a>
+        {{/hasComments}}
+    {{/reviewPage}}
     <div class="smallSeparator"></div>
     
 </div>
