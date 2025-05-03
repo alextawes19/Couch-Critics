@@ -13,63 +13,51 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.models.Review;
 import com.example.demo.models.Movie;
+import com.example.demo.models.MovieThumbnail;
 
 @Service
 public class SavedService {
     
     private final DataSource dataSource;
+    private final HomeService homeService;
 
     @Autowired
-    public SavedService(DataSource dataSource) {
+    public SavedService(DataSource dataSource, HomeService homeService) {
         this.dataSource = dataSource;
+        this.homeService = homeService;
     }
 
     // Get the current user's saved movies
-    public List<Movie> getSavedMovies(String currentUserId) {
-        System.out.println("Service: User is attempting to view saved movies");
-        List<Movie> savedMovies = new ArrayList<>();
-
-        // Query to get a user's saved movies
-        final String sql = "SELECT m.movieId, title, runtime, year, overview, genre, director, posterLink FROM Save s JOIN Movie m ON s.movieId=m.movieId WHERE s.userId = ?";
-
-        // Run query with datasource 
+    public List<MovieThumbnail> getSavedMovies(String currentUserId) {
+        System.out.println("SavedService: User is attempting to view saved movies");
+        List<MovieThumbnail> savedList = new ArrayList<>();
+        final String sqlQuery = "SELECT m.movieId, posterLink, title, year FROM Movie m JOIN Save s ON s.movieId = m.movieId AND s.userId = ?";
+        
         try (Connection conn = dataSource.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, Integer.parseInt(currentUserId));
+                PreparedStatement stmt = conn.prepareStatement(sqlQuery)) {
+                    
+                    stmt.setInt(1, Integer.parseInt(currentUserId));
 
-            try (ResultSet rs = stmt.executeQuery()) {
-                // Create movie objects to be displayed
-                while(rs.next()) {
-                    String imageLink;
-                    if (rs.getString("posterLink").equals("N/A") || rs.getString("posterLink").equals("")) {
-                        imageLink = "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
-                    } else {
-                        imageLink =rs.getString("posterLink");
+                    try (ResultSet rs = stmt.executeQuery()) {
+                        while (rs.next()) {
+                            String imageLink;
+                            if (rs.getString("posterLink").equals("N/A") || rs.getString("posterLink").equals("")) {
+                                imageLink = "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
+                            } else {
+                                imageLink =rs.getString("posterLink");
+                            }
+                            String movieId = rs.getString("movieId");
+                            String title = rs.getString("title");
+                            String year = rs.getString("year");
+                            double rating = homeService.getAverageRating(movieId);
+                            MovieThumbnail movieToAdd = new MovieThumbnail(movieId, title, year, imageLink, rating);
+                            savedList.add(movieToAdd);
+                        }
                     }
-                    // Get movie information
-                    String movieId = rs.getString("movieId");
-                    String title = rs.getString("title");
-                    String runtime =  rs.getString("runtime");
-                    String year = rs.getString("year");
-                    String overview = rs.getString("overview");
-                    String genre = rs.getString("genre");
-                    String director = rs.getString("director");
-                    String posterUrl = imageLink;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } 
 
-                    String rating = "0";
-
-                    // Create movie object 
-                    Movie movie = new Movie(movieId, title, runtime, year, rating, overview, genre, director, posterUrl, true);
-
-                    // Add movie to list
-                    savedMovies.add(movie);
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace(); // Log error
-        }
-
-        return savedMovies;
+        return savedList;
     }
 }
