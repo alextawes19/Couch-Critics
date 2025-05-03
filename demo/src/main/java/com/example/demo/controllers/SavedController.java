@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import com.example.demo.models.Comment;
 import com.example.demo.models.MovieThumbnail;
 import com.example.demo.models.Review;
 import com.example.demo.models.Movie;
+import com.example.demo.services.HomeService;
 import com.example.demo.services.SavedService;
 import com.example.demo.services.UserService;
 
@@ -25,11 +28,13 @@ public class SavedController {
 
     private final SavedService savedService;
     private final UserService userService;
+    private final HomeService homeService;
 
     @Autowired
-    public SavedController(SavedService savedService, UserService userService) {
+    public SavedController(SavedService savedService, UserService userService, HomeService homeService) {
         this.savedService = savedService;
         this.userService = userService;
+        this.homeService = homeService;
     }
 
     @GetMapping
@@ -43,13 +48,16 @@ public class SavedController {
         //Be sure to set has comments to false here
         
         try {
+            System.out.println("DEBUG: SavedController try block");
             // Render saved movies for current user
             String currentUserId = userService.getLoggedInUser().getUserId();
-            List<Movie> movies = savedService.getSavedMovies(currentUserId);
-            saved.addObject("movies", movies);
+            List<MovieThumbnail> savedMovies = savedService.getSavedMovies(currentUserId);
+            System.out.println("DEBUG SavedController: saved movie list size: " + savedMovies.size());
+            saved.addObject("thumbnail", savedMovies);
 
             // No content message
-            if (movies.isEmpty()) {
+            if (savedMovies.isEmpty()) {
+                System.out.println("DEBUG: saved movie list is empty");
                 saved.addObject("isNoContent", true);
             }
         } catch (Exception e) {
