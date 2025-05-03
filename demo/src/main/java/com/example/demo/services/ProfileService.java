@@ -32,7 +32,7 @@ public class ProfileService {
         List<MovieThumbnail> reviewedMovies = new ArrayList<>();
 
         // Query to get a user's reviews
-        final String sql = "SELECT m.movieId, posterLink, title, year FROM Movie m JOIN Review r ON r.movieId = m.movieId AND r.userId = ?";
+        final String sql = "SELECT m.movieId, posterLink, title, year, r.score FROM Movie m JOIN Review r ON r.movieId = m.movieId AND r.userId = ?";
 
         // Run query with datasource 
         try (Connection conn = dataSource.getConnection();
@@ -53,7 +53,7 @@ public class ProfileService {
                     String movieId = rs.getString("movieId");
                     String title = rs.getString("title");
                     String year = rs.getString("year");
-                    double rating = homeService.getAverageRating(movieId);
+                    double rating = rs.getInt("score");
                     MovieThumbnail movieToAdd = new MovieThumbnail(movieId, title, year, imageLink, rating);
                     reviewedMovies.add(movieToAdd);
                 }
