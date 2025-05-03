@@ -14,17 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.models.Comment;
 import com.example.demo.models.MovieThumbnail;
-import com.example.demo.models.Review;
-import com.example.demo.models.Movie;
 import com.example.demo.services.HomeService;
 import com.example.demo.services.SavedService;
 import com.example.demo.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.sql.DataSource;
 import javax.xml.crypto.Data;
@@ -33,9 +26,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
 
 @Controller
 @RequestMapping("/saved")
