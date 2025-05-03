@@ -17,7 +17,7 @@ public class Movie {
     private final String year;
 
     //MPA rating system for the movie (PG, PG-13, R, etc.)
-    private final String rating; 
+    private final String score; 
 
     //Description of the movie
     private final String overview;
@@ -29,21 +29,21 @@ public class Movie {
     private final String director;
 
     //Url to the movie poster
-    private final String posterUrl;
+    private final String posterLink;
 
     //Whether the current user has the movie saved
     private final boolean isSaved;
 
-    public Movie(String movieId, String title, String runtime, String year, String rating, String overview, String genre, String director, String posterUrl, boolean isSaved) {
+    public Movie(String movieId, String title, String runtime, String year, String score, String overview, String genre, String director, String posterLink, boolean isSaved) {
         this.movieId = movieId;
         this.title = title;
         this.runtime = runtime;
         this.year = year;
-        this.rating = rating;
+        this.score = score;
         this.overview = overview;
         this.genre = genre;
         this.director = director;
-        this.posterUrl = posterUrl; 
+        this.posterLink = posterLink; 
         this.isSaved = isSaved;
     }
 
@@ -62,8 +62,8 @@ public class Movie {
         return year;
     }
 
-    public String getRating() {
-        return rating;
+    public String getScore() {
+        return score;
     }
 
     public String getOverview() {
@@ -78,8 +78,8 @@ public class Movie {
         return director;
     }
 
-    public String getPosterUrl() {
-        return posterUrl;
+    public String getPosterLink() {
+        return posterLink;
     }
 
     public boolean getIsSaved() {

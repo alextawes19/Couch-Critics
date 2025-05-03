@@ -3,16 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{movie.title}} - Movie Details</title>
     <link rel="stylesheet" href="/css/styles.css">
-    
 </head>
 <body>
     {{> fragments/navbar}}
-    {{#placeholder}}
-    {{> fragments/movie}}
-    {{/placeholder}}
-    {{> fragments/review_box}}
-    
-</body>
 
+    <main>
+        <div class="movieContainer">
+            <div class="posterContainer">
+                <img class="poster" src="{{movie.posterLink}}" alt="Poster of {{movie.title}}" height="350">
+            </div>
+
+            <div class="movieDetails">
+                <h1>{{movie.title}} ({{movie.year}})</h1>
+                <p>Runtime: {{movie.runtime}} minutes</p>
+                <p>Rating: {{movie.score}}</p>
+                <p>{{movie.overview}}</p>
+
+                <div class="detailsSubDiv">
+                    <div class="genre">
+                        Genre:
+                        <ul>
+                            {{#movie.genres}}
+                                <li>{{.}}</li>
+                            {{/movie.genres}}
+                        </ul>
+                    </div>
+
+                    <div class="director">
+                        Directed By:
+                        <ul>
+                            <li>{{movie.director}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="movieButtons">
+            <div class="buttonBox">
+                <a href="/">Return Home</a>
+            </div>
+
+            <div class="buttonBox">
+                <form method="post" action="/saved/{{movie.movieId}}" class="saveForm">
+                    {{#movie.saved}}
+                        <input type="hidden" name="add" value="false"/>
+                        <button type="submit" class="transparent">Unsave Movie</button>
+                    {{/movie.saved}}
+
+                    {{^movie.saved}}
+                        <input type="hidden" name="add" value="true"/>
+                        <button type="submit" class="transparent">Save Movie</button>
+                    {{/movie.saved}}
+                </form>
+            </div>
+        </div>
+
+        {{> fragments/review_box}}
+    </main>
+</body>
 </html>
