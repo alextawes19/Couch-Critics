@@ -48,15 +48,15 @@
 
             <div class="buttonBox">
                 <form method="post" action="/saved/{{movie.movieId}}" class="saveForm">
-                    {{#movie.saved}}
+                    {{#movie.isSaved}}
                         <input type="hidden" name="add" value="false"/>
                         <button type="submit" class="transparent">Unsave Movie</button>
-                    {{/movie.saved}}
+                    {{/movie.isSaved}}
 
-                    {{^movie.saved}}
+                    {{^movie.isSaved}}
                         <input type="hidden" name="add" value="true"/>
                         <button type="submit" class="transparent">Save Movie</button>
-                    {{/movie.saved}}
+                    {{/movie.isSaved}}
                 </form>
             </div>
         </div>
