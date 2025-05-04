@@ -30,7 +30,7 @@ public class ReviewService {
     public Review getReview(String reviewId) {
         System.out.println("Retrieving: " + reviewId);
 
-        final String getReview = "select u.firstName,u.lastName,u.userId,r.movieId,r.reviewDate,r.reviewText,r.score from review r, user u where r.userId=u.userId and r.reviewId=?;";
+        final String getReview = "SELECT u.firstName,u.lastName,u.userId,r.movieId,r.reviewDate,r.reviewText,r.score FROM review r, user u WHERE r.userId=u.userId AND r.reviewId=?;";
 
         try(Connection conn = dataSource.getConnection();
             PreparedStatement preparedReview = conn.prepareStatement(getReview)) {
@@ -61,7 +61,7 @@ public class ReviewService {
     public List<Comment> getComments(String reviewId) {
         System.out.println("Retrieving comments from review: " + reviewId);
 
-        final String getComments = "select u.userId,u.firstName,u.lastName,c.commentDate,c.commentText,c.commentId from user u, comment c where c.userId=u.userId and c.reviewId = ?;";
+        final String getComments = "SELECT u.userId,u.firstName,u.lastName,c.commentDate,c.commentText,c.commentId FROM user u, comment c WHERE c.userId=u.userId AND c.reviewId = ?;";
 
         List<Comment> result = new ArrayList<>();
 

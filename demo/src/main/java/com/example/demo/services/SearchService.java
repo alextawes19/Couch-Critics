@@ -27,7 +27,7 @@ public class SearchService {
         System.out.println("Searching for " + movieName);
         List<MovieThumbnail> result = new ArrayList<>();
 
-        final String searchStatement = "select m.title,m.year,m.movieId,m.posterLink from movie m where m.title like ?;";
+        final String searchStatement = "SELECT m.title,m.year,m.movieId,m.posterLink FROM movie m WHERE m.title LIKE ?;";
         try(Connection conn = dataSource.getConnection();
             PreparedStatement preparedSearch = conn.prepareStatement(searchStatement)) {
             
@@ -64,7 +64,7 @@ public class SearchService {
     public double getAverageScore(String movieId) {
         double average = 0;
 
-        final String searchStatement = "select r.movieId,avg(r.score) as average from review r where r.movieId=? group by r.movieId;";
+        final String searchStatement = "SELECT r.movieId,avg(r.score) as average FROM review r WHERE r.movieId=? GROUP BY r.movieId;";
         try(Connection conn = dataSource.getConnection();
             PreparedStatement preparedSearch = conn.prepareStatement(searchStatement)) {
             
