@@ -23,6 +23,8 @@ import javax.sql.DataSource;
 import com.example.demo.models.Movie;
 import com.example.demo.models.Review;
 import com.example.demo.services.UserService;
+import com.example.demo.services.MovieService;
+import com.example.demo.services.HomeService;
 
 import java.util.List;
 
@@ -39,11 +41,15 @@ public class MovieController {
 
     private DataSource dataSource;
     private UserService userService;
+    private MovieService movieService;
+    private HomeService homeService;
 
     @Autowired
-    public MovieController(DataSource dataSource, UserService userService) {
+    public MovieController(DataSource dataSource, UserService userService, MovieService movieService, HomeService homeService ) {
         this.dataSource = dataSource;
         this.userService = userService;
+        this.movieService = movieService;
+        this.homeService = homeService;
     }
 
     
@@ -69,6 +75,10 @@ public class MovieController {
             "FROM Save WHERE movieId = " + movieId + " AND userId = " + userId + ";";
 
         Movie retrievedMovie = null;
+        List<Review> reviews = movieService.getReviews(movieId);
+        double averageRating = homeService.getAverageRating(movieId);
+
+
         String title = null, overview = null, runtime = null, score = null, genre = null, director = null, posterLink = null, year = null;
         boolean saved = false;
 
@@ -107,16 +117,23 @@ public class MovieController {
         } 
         System.out.println(movieId + " " + title + " " + genre);
         mv.addObject("movie", retrievedMovie);
+        mv.addObject("reviews", reviews);
+        mv.addObject("average", averageRating);
 
         return mv;
     }
-    /*@PostMapping("/{movieId}/createreview")
+    @PostMapping("/{movieId}/createreview")
     public String testForm(@PathVariable("movieId") String movieId, @RequestParam(name="score")int score,@RequestParam(name="review")String reviewContents) {
         
-        System.out.println(score);
-        System.out.println(reviewContents);
-        
-        return "redirect:/movie/" + movieId;
-    }*/
+        System.out.println(reviewContents); 
+        boolean outcome = movieService.createReview(reviewContents, movieId, Integer.toString(score));
+
+        if (outcome) {
+            return "redirect:/movie/" + movieId;
+        } 
+
+        String message = URLEncoder.encode("Failed to create Review. Please try again.", StandardCharsets.UTF_8);
+        return "redirect:/movie/" + movieId + "?error=" + message;
+    }
 }
 

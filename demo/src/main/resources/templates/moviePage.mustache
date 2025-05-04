@@ -18,7 +18,7 @@
             <div class="movieDetails">
                 <h1>{{movie.title}} ({{movie.year}})</h1>
                 <p>Runtime: {{movie.runtime}} minutes</p>
-                <p>Rating: {{movie.score}}</p>
+                <p>Average Rating: {{average}}</p>
                 <p>{{movie.overview}}</p>
 
                 <div class="detailsSubDiv">
@@ -61,7 +61,43 @@
             </div>
         </div>
 
-        {{> fragments/review_box}}
+        <div class="reviewContainer">
+            <div class="reviewBackground">
+                <form method="post" action="/movie/{{movie.movieId}}/createreview"> 
+                    <div>
+                        Pick a Score and Leave a Review:   
+                        <select name="score">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option selected="selected">5</option>
+                        </select>
+                    </div>
+                    <textarea name="review" class="reviewBox"></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+                <div class="bigSeparator"></div>
+                <h2>Reviews:</h2>
+                <div class="smallSeparator"></div>
+                {{#reviews}}
+                    <div class="singleReview">
+                        <p><strong>Score:</strong> {{score}}</p>
+                        <p><strong>Review:</strong> {{reviewText}}</p>
+                        <p><strong>Date:</strong> {{reviewDate}}</p>
+                        <p><strong>By:</strong> {{firstName}} {{lastName}}</p>
+                        <span><strong>Comments:</strong> {{commentCount}}</span>
+                         <form action="/review/{{reviewId}}" method="get" style="display: inline-block; margin: 0;">
+                            <button type="submit">View Comments</button>
+                        </form>
+                        <hr>
+                    </div>
+                {{/reviews}}
+                {{^reviews}}
+                    <p>No reviews yet.</p>
+                {{/reviews}}
+            </div>
+        </div>
     </main>
 </body>
 </html>
