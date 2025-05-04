@@ -17,7 +17,6 @@ import java.net.URLEncoder;
 @RequestMapping("/register")
 public class RegistrationController {
 
-    // UserService has user login and registration related functions.
     private final UserService userService;
 
     @Autowired
@@ -32,15 +31,14 @@ public class RegistrationController {
     public ModelAndView page(@RequestParam(name = "error", required = false) String error) {
         ModelAndView mv = new ModelAndView("registerPage");
 
-        // If an error occured, you can set the following property with the
-        // error message to show the error message to the user.
+        
         mv.addObject("errorMessage", error);
 
         return mv;
     }
 
     /**
-     * This handles user registration form submissions.
+     * Handles user registration form submissions.
      */
     @PostMapping
     public String register(@RequestParam("username") String username,
@@ -50,15 +48,12 @@ public class RegistrationController {
             @RequestParam("lastName") String lastName) throws UnsupportedEncodingException {
         // Passwords should have at least 3 chars.
         if (password.trim().length() < 3) {
-            // If the password is too short redirect to the registration page
-            // with an error message.
             String message = URLEncoder.encode("Passwords should have at least 3 nonempty letters.", "UTF-8");
             return "redirect:/register?error=" + message;
         }
 
         if (!password.equals(passwordRepeat)) {
-            // If the password repeat does not match the password redirect to the registration page
-            // with an error message.
+            // If the password repeat does not match the password redirect to the registration page with an error message.
             String message = URLEncoder.encode("Passwords do not match.", "UTF-8");
             return "redirect:/register?error=" + message;
         }
@@ -71,14 +66,12 @@ public class RegistrationController {
                 return "redirect:/login";
             } else {
                 // If the registration fails redirect to registration page with a message.
-                String message = URLEncoder
-                        .encode("Registration failed. Please try again.", "UTF-8");
+                String message = URLEncoder.encode("Registration failed. Please try again.", "UTF-8");
                 return "redirect:/register?error=" + message;
             }
         } catch (Exception e) {
             // If the registration fails redirect to registration page with a message.
-            String message = URLEncoder
-                    .encode("An error occurred: " + e.getMessage(), "UTF-8");
+            String message = URLEncoder.encode("An error occurred: " + e.getMessage(), "UTF-8");
             return "redirect:/register?error=" + message;
         }
     }

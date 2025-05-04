@@ -91,10 +91,14 @@ public class MovieController {
                 ResultSet rsIsSaved = pstmtIsSaved.executeQuery();
                 //SELECT postText, postDate, p.userId, userName, firstName, lastName " 
                 if (rsMovie.next()) {
+                    if (rsMovie.getString("posterLink").equals("N/A") || rsMovie.getString("posterLink").equals("")) {
+                        posterLink = "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
+                    } else {
+                        posterLink =rsMovie.getString("posterLink");
+                    }
                     //Int movieId = rsMovie.getString("movieId");
                     title =  rsMovie.getString("title");
                     overview =  rsMovie.getString("overview");
-                    posterLink =  rsMovie.getString("posterLink");
                     runtime =  rsMovie.getString("runtime");
                     genre =  rsMovie.getString("genre");
                     director =  rsMovie.getString("director");
