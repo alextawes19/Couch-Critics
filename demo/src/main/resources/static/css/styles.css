@@ -154,7 +154,11 @@ li {
     border-radius: 10px;
     border-color: black;
     border-width: 1px;
+    text-align: center;
 
+}
+.buttonBox a {
+    height: 100%;
 }
 
 .homeContainer {

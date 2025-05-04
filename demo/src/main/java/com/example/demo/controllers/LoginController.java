@@ -21,7 +21,6 @@ import com.example.demo.services.UserService;
 @RequestMapping("/login")
 public class LoginController {
 
-    // UserService has user login and registration related functions.
     private final UserService userService;
 
     @Autowired
@@ -29,27 +28,17 @@ public class LoginController {
         this.userService = userService;
     }
 
-    /**
-     * This handles serving the login page at /login URL.
-     */
     @GetMapping
     public ModelAndView page(@RequestParam(name = "error", required = false) String error) {
-        // See notes on ModelAndView in BookmarksController.java.
         ModelAndView mv = new ModelAndView("loginPage");
 
-        // Log out if the user is already logged in.
         userService.unAuthenticate();
 
-        // If an error occured, you can set the following property with the
-        // error message to show the error message to the user.
         mv.addObject("errorMessage", error);
 
         return mv;
     }
 
-    /**
-     * This handles the /login form submission.
-     */
     @PostMapping
     public String login(@RequestParam("username") String username,
             @RequestParam("password") String password) {
@@ -58,21 +47,14 @@ public class LoginController {
         try {
             isAuthenticated = userService.authenticate(username, password);
         } catch (SQLException e) {
-            // Redirect back to the login page with an error message if authentication
-            // fails.
-            String message = URLEncoder.encode("Authentication failed. Please try again.",
-                    StandardCharsets.UTF_8);
+            String message = URLEncoder.encode("Authentication failed. Please try again.", StandardCharsets.UTF_8);
             return "redirect:/login?error=" + message;
         }
 
         if (isAuthenticated) {
-            // Redirect to home page if authentication is successful.
             return "redirect:/";
         } else {
-            // Redirect back to the login page with an error message if authentication
-            // fails.
-            String message = URLEncoder.encode("Invalid username or password. Please try again.",
-                    StandardCharsets.UTF_8);
+            String message = URLEncoder.encode("Invalid username or password. Please try again.", StandardCharsets.UTF_8);
             return "redirect:/login?error=" + message;
         }
     }
