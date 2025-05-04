@@ -30,7 +30,7 @@ public class ReviewService {
     public Review getReview(String reviewId) {
         System.out.println("Retrieving: " + reviewId);
 
-        final String getReview = "SELECT userId,movieId,reviewDate,reviewText,score FROM review WHERE reviewId=?";
+        final String getReview = "select u.firstName,u.lastName,u.userId,r.movieId,r.reviewDate,r.reviewText,r.score from review r, user u where r.userId=u.userId and r.reviewId=?;";
 
         try(Connection conn = dataSource.getConnection();
             PreparedStatement preparedReview = conn.prepareStatement(getReview)) {
@@ -39,12 +39,14 @@ public class ReviewService {
 
             try(ResultSet rs = preparedReview.executeQuery()) {
                 if(rs.next()) {
-                    String userId = rs.getString("userId");
-                    String movieId = rs.getString("movieId");
-                    String reviewDate = rs.getString("reviewDate");
-                    String reviewText = rs.getString("reviewText");
-                    int score = rs.getInt("score");
-                    Review returnedReview = new Review(reviewId,userId, movieId, reviewDate, reviewText, score, false, 0);
+                    String fname = rs.getString("u.firstName");
+                    String lname = rs.getString("u.lastName");
+                    String userId = rs.getString("u.userId");
+                    String movieId = rs.getString("r.movieId");
+                    String reviewDate = rs.getString("r.reviewDate");
+                    String reviewText = rs.getString("r.reviewText");
+                    int score = rs.getInt("r.score");
+                    Review returnedReview = new Review(reviewId,userId, movieId, reviewDate, reviewText, score, false, 0,fname,lname);
                     return returnedReview;
                 }
             }
@@ -59,7 +61,7 @@ public class ReviewService {
     public List<Comment> getComments(String reviewId) {
         System.out.println("Retrieving comments from review: " + reviewId);
 
-        final String getComments = "SELECT commentId,commentDate,commentText FROM comment WHERE reviewId=?;";
+        final String getComments = "select u.userId,u.firstName,u.lastName,c.commentDate,c.commentText,c.commentId from user u, comment c where c.userId=u.userId and c.reviewId = ?;";
 
         List<Comment> result = new ArrayList<>();
 
@@ -70,10 +72,12 @@ public class ReviewService {
 
             try(ResultSet rs = preparedComments.executeQuery()) {
                 while(rs.next()) {
+                    String fname = rs.getString("u.firstName");
+                    String lname = rs.getString("u.lastName");
                     String commentId = rs.getString("commentId");
                     String commentDate = rs.getString("commentDate");
                     String commentText = rs.getString("commentText");
-                    result.add(new Comment(commentId,commentDate,commentText));
+                    result.add(new Comment(commentId,commentDate,commentText,fname,lname));
                 }
                 return result;
             }
