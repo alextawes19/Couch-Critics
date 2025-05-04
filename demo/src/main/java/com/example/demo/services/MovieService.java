@@ -73,7 +73,7 @@ public class MovieService {
         " COUNT(c.commentId) AS commentCount " +
         " FROM review r " + 
         " JOIN user u ON r.userId = u.userId " +
-        " LEFT JOIN comment c ON r.reviewId = c.reviewId AND r.userId = c.userId " + 
+        " LEFT JOIN comment c ON r.reviewId = c.reviewId " + 
         " WHERE r.movieId = ? " + 
         " GROUP BY r.reviewId, r.movieId, r.userId, u.firstName, u.lastName, r.reviewDate, r.reviewText, r.score;";
 
