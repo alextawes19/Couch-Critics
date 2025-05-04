@@ -1,10 +1,13 @@
 <div class="clickedReviewContainer">
     <div class="reviewBackground" id="clickedReviewBox">
+        <h2>Review:</h2>
         {{#reviewObj}}
             {{> fragments/review}}
         {{/reviewObj}}
         <p class="commentBoxLabel">Leave a Comment:</p>
         {{> fragments/commentBox}}
+        <div class="smallSeparator"></div>
+        <h2>Comments:</h2>
         <div class="smallSeparator"></div>
         {{#comments}}
             {{> fragments/comment}}
