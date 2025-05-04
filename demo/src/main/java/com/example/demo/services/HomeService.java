@@ -55,7 +55,7 @@ public class HomeService {
         return movieList;
     }
 
-    private double getAverageRating(String movieId) {
+    public double getAverageRating(String movieId) {
         double average = 0;
 
         final String searchStatement = "select r.movieId,avg(r.score) as average from review r where r.movieId=? group by r.movieId;";
