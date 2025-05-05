@@ -1,3 +1,5 @@
+Before running, make sure you cd to the full path /demo which is where the pom.xml file is. 
+
 #Couch Critics by Group 11
 ##Team Member Contribution
 Alex Tawes:
