@@ -27,8 +27,8 @@ username: root
 password: mysqlpass
 
 ##Test (username, password) Pairs
-1. ()
-2. ()
+1. (atawes, 123)
+2. (bob, 123)
 3. ()
 
 To load csv data into Movie table:
