@@ -45,3 +45,46 @@ INSERT INTO save VALUES (" + userId + "," + movieId + ");
 --This delete statement deletes the movie the user chooses to unsave
 --Page: http://localhost:8081/movie/{movieId}
 DELETE FROM save WHERE movieId = " + movieId + " AND userId = " + userId + ";
+
+-- This query fetches details about a singular movie.
+-- joins the movie table with the review table with a left join. 
+SELECT movie.movieId, movie.title, movie.overview, movie.posterLink, movie.runtime, movie.genre, movie.director, movie.year, review.score
+FROM movie LEFT JOIN review ON review.movieId = movie.movieId
+WHERE movie.movieId = {movieId};
+
+-- Check if the current user has saved the movie. 
+-- If count is > 0 then movie is saved otherwise it is not.
+SELECT COUNT(*) AS isSaved
+FROM Save
+WHERE movieId = {movieId} AND userId = {userId};
+
+-- adds a new review into the review table. 
+INSERT INTO review (userId, movieId, reviewDate, reviewText, score) 
+VALUES (?, ?, NOW(), ?, ?);
+
+-- retrieves all reviews for a given movieId as well as first name and last name from the user table.
+-- checks if the review has any comments by using count() 
+-- number of comments. 
+SELECT r.reviewId, r.movieId, r.userId, u.firstName, u.lastName, r.reviewDate, r.reviewText, r.score,
+IF(COUNT(c.commentId) = 0, FALSE, TRUE) AS hasComments,
+COUNT(c.commentId) AS commentCount
+FROM review r
+JOIN user u ON r.userId = u.userId
+LEFT JOIN comment c ON r.reviewId = c.reviewId
+WHERE r.movieId = ?
+GROUP BY r.reviewId, r.movieId, r.userId, u.firstName, u.lastName, r.reviewDate, r.reviewText, r.score;
+
+-- get details about a specific review 
+SELECT u.firstName, u.lastName, u.userId, r.movieId, r.reviewDate, r.reviewText, r.score
+FROM review r, user u
+WHERE r.userId = u.userId AND r.reviewId = ?;
+
+-- gets all comments from a specific review. 
+SELECT u.userId, u.firstName, u.lastName, c.commentDate, c.commentText, c.commentId
+FROM user u, comment c
+WHERE c.userId = u.userId AND c.reviewId = ?;
+
+-- insert a new comment
+INSERT INTO comment (userId, reviewId, commentDate, commentText)
+VALUES (?, ?, NOW(), ?);
+
