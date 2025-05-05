@@ -1,3 +1,34 @@
+#Couch Critics by Group 11
+##Team Member Contribution
+Alex Tawes:
+     - ER Diagram, normalization, and db design
+     - Saved Movies page
+     - Profile page 
+     - Some CSS design
+Evan Gavino:
+     -
+Henry Grinberg:
+     -
+Austin Miller:
+     -
+
+##Technologies Used
+- Spring Boot
+- Maven
+- Bcrypt
+- docker
+- MySql
+
+##Database information
+name: couch_critics
+username: root
+password: mysqlpass
+
+##Test (username, password) Pairs
+1. ()
+2. ()
+3. ()
+
 To load csv data into Movie table:
 1.) docker cp "YOUR FILE PATH\Term Project\imdb_top_1000.csv" mysql-server-4370:/var/lib/mysql-files
 2.) In docker instance run the following
