@@ -8,7 +8,9 @@ Alex Tawes:
      - Profile page 
      - Some CSS design
 Evan Gavino:
-     -
+     - Front end page structure
+     - Movie search page
+     - Individual review page
 Henry Grinberg:
      - ddl.sql
      - Single Movie page with reviews
