@@ -58,7 +58,7 @@ public class HomeService {
     public double getAverageRating(String movieId) {
         double average = 0;
 
-        final String searchStatement = "select r.movieId,avg(r.score) as average from review r where r.movieId=? group by r.movieId;";
+        final String searchStatement = "SELECT r.movieId,avg(r.score) as average FROM review r WHERE r.movieId=? GROUP BY r.movieId;";
         try(Connection conn = dataSource.getConnection();
             PreparedStatement preparedSearch = conn.prepareStatement(searchStatement)) {
             

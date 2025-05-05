@@ -10,7 +10,9 @@ Evan Gavino:
 Henry Grinberg:
      -
 Austin Miller:
-     -
+     - Authentication management
+     - Login, Register pages, frontend and backend
+     - Splash page with list of all Movies
 
 ##Technologies Used
 - Spring Boot
