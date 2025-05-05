@@ -357,6 +357,7 @@ li {
 
 .searchForm {
     display: flex;
+    gap: 30px;
 
 }
 .searchForm button {
@@ -367,11 +368,18 @@ li {
     padding-bottom: 5px;
 }
 
-.searchForm input {
+.yearSelect {
+    width: 100px;
+    height: 50px;
+    font-size: 25px; 
+}
+
+.searchBar {
     width: 400px;
     height: 50px;
     font-size: 25px;
 }
+
 
 .searchForm input:focus {
     outline: none;

@@ -23,17 +23,17 @@ public class SearchService {
         this.dataSource = dataSource;
     }
 
-    public List<MovieThumbnail> search(String movieName) {
-        System.out.println("Searching for " + movieName);
+    public List<MovieThumbnail> search(String movieName, String year) {
+        System.out.println("Searching for " + movieName +  ", " + year);
         List<MovieThumbnail> result = new ArrayList<>();
 
-        final String searchStatement = "SELECT m.title,m.year,m.movieId,m.posterLink FROM movie m WHERE m.title LIKE ?;";
+        final String searchStatement = "SELECT m.title,m.year,m.movieId,m.posterLink FROM movie m WHERE m.title LIKE ? AND m.year LIKE ?;";
         try(Connection conn = dataSource.getConnection();
             PreparedStatement preparedSearch = conn.prepareStatement(searchStatement)) {
             
             preparedSearch.setString(1, "%"+movieName+"%");
+            preparedSearch.setString(2,"%"+year+"%");
 
-            
             try(ResultSet rs = preparedSearch.executeQuery()) {
                 while(rs.next()) {
                     String imageLink;

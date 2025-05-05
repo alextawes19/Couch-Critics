@@ -29,12 +29,12 @@ public class SearchController {
 
 
     @GetMapping
-    public ModelAndView page(@RequestParam(name="movieName") String movieName) {
+    public ModelAndView page(@RequestParam(name="movieName") String movieName, @RequestParam(name="year") String year) {
         ModelAndView search = new ModelAndView("searchPage");
 
-        if (movieName != "") {
+        if (movieName != "" || year != "") {
             
-            List<MovieThumbnail> thumbnailList = searchService.search(movieName);
+            List<MovieThumbnail> thumbnailList = searchService.search(movieName,year);
             search.addObject("results", thumbnailList);
 
         }

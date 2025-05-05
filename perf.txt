@@ -1,0 +1,15 @@
+Index Creation:
+CREATE INDEX idx_movie_title ON Movie(title);
+
+CREATE INDEX idx_year ON Movie(year);
+
+
+Affected Queries:
+
+SELECT movieId, posterLink, title, year FROM Movie ORDER BY title;
+    Before: 0.06 seconds
+    After: 0.00 seconds
+
+SELECT m.title,m.year,m.movieId,m.posterLink FROM movie m WHERE m.title LIKE ? AND m.year LIKE ?;
+    Before: 0.01 seconds
+    After: 0.00 seconds
