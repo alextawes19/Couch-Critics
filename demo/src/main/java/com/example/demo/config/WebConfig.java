@@ -28,8 +28,8 @@ public class WebConfig implements WebMvcConfigurer {
                 // Exclude login and register paths.
                 .excludePathPatterns("/login")
                 .excludePathPatterns("/register")
-                .excludePathPatterns("/css/**")
-                .excludePathPatterns("/");
+                .excludePathPatterns("/css/**");
+                //.excludePathPatterns("/");
     }
 
 }
