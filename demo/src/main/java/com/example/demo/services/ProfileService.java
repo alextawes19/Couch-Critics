@@ -71,7 +71,7 @@ public class ProfileService {
         List<String> userInfo = new ArrayList<>();
     
         // Query to get user's info
-        final String sql = "SELECT username, firstName, lastName from User where userId = ?";
+        final String sql = "SELECT username, firstName, lastName, COUNT(distinct r.reviewId) as rev_count, COUNT(distinct s.movieId) as save_count from User u, Review r, Save s where u.userId = ? AND u.userId=r.userId AND u.userId=s.userId";
 
         try (Connection conn = dataSource.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -89,6 +89,12 @@ public class ProfileService {
                    
                     String lastName = rs.getString("lastName");
                     userInfo.add(lastName);
+
+                    String saveCount = String.valueOf(rs.getInt("save_count"));
+                    userInfo.add(saveCount);
+
+                    String revCount = String.valueOf(rs.getInt("rev_count"));
+                    userInfo.add(revCount);
                 }
             }
         } catch (Exception e) {

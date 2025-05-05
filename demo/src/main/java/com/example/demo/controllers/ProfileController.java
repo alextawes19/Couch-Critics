@@ -42,11 +42,15 @@ public class ProfileController {
             String username = userInfo.get(0);
             String firstName = userInfo.get(1);
             String lastName = userInfo.get(2);
+            String numSaved = userInfo.get(3);
+            String numReviewed = userInfo.get(4);
 
             profile.addObject("thumbnail", thumbnailList);
             profile.addObject("username", username);
             profile.addObject("firstName", firstName);
             profile.addObject("lastName", lastName);
+            profile.addObject("numSaved", numSaved);
+            profile.addObject("numReviewed", numReviewed);
         } catch (Exception e) {
             profile.addObject("errorMessage", "Some error occurred!");
             e.printStackTrace();
