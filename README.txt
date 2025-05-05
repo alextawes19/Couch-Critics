@@ -29,7 +29,7 @@ password: mysqlpass
 ##Test (username, password) Pairs
 1. (atawes, 123)
 2. (bob, 123)
-3. ()
+3. (dwade, 123)
 
 To load csv data into Movie table:
 1.) docker cp "YOUR FILE PATH\Term Project\imdb_top_1000.csv" mysql-server-4370:/var/lib/mysql-files

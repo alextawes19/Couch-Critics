@@ -71,7 +71,16 @@ public class ProfileService {
         List<String> userInfo = new ArrayList<>();
     
         // Query to get user's info
-        final String sql = "SELECT username, firstName, lastName, COUNT(distinct r.reviewId) as rev_count, COUNT(distinct s.movieId) as save_count from User u, Review r, Save s where u.userId = ? AND u.userId=r.userId AND u.userId=s.userId";
+        final String sql = """
+                                SELECT u.username, u.firstName, u.lastName,
+                                    COUNT(DISTINCT r.reviewId) AS rev_count,
+                                    COUNT(DISTINCT s.movieId) AS save_count
+                                FROM User u
+                                LEFT JOIN Review r ON u.userId = r.userId
+                                LEFT JOIN Save s ON u.userId = s.userId
+                                WHERE u.userId = ?
+                                GROUP BY u.username, u.firstName, u.lastName
+                            """;
 
         try (Connection conn = dataSource.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)) {

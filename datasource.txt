@@ -1,4 +1,4 @@
 Kaggle datasource: https://www.kaggle.com/datasets/arthurchongg/imdb-top-1000-movies 
     - Provides IMDB's top 1000 movies
 
-We manually created extra Movie table records as well as manually populated the database.
+We imported the imdb_top_1000.csv data into the Movie table and manually inserted extra movies as well.

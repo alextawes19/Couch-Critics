@@ -60,5 +60,8 @@ CREATE TABLE Save (
 -- Index for finding movies by title
 CREATE INDEX idx_movie_title ON Movie(title);
 
+-- Index for optimizing user login
+CREATE UNIQUE INDEX idx_username ON User(username);
+
 -- Index for finding movies by year
-CREATE INDEX idx_year ON Movie(year);
+CREATE INDEX idx_movie_year ON Movie(year);
