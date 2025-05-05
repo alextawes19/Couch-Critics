@@ -25,3 +25,23 @@ SELECT userId,username,password,firstName,lastName FROM User WHERE username = ?;
 --This query is used to register a new user with the given username, password, fname, and lname
 --Page: localhost:8081/register
 INSERT INTO User (username, password, firstName, lastName) values (?, ?, ?, ?);
+
+--This query is used to obtain user information such as their firstName, lastName, username, number of reviewed and saved movies
+--Page: http://localhost:8081/profile
+SELECT u.username, u.firstName, u.lastName, COUNT(DISTINCT r.reviewId) AS rev_count, COUNT(DISTINCT s.movieId) AS save_count FROM User u LEFT JOIN Review r ON u.userId = r.userId LEFT JOIN Save s ON u.userId = s.userId WHERE u.userId = ? GROUP BY u.username, u.firstName, u.lastName;
+
+--This query gets the movie information for the movies the user reviewed
+--Page: http://localhost:8081/profile
+SELECT m.movieId, posterLink, title, year, r.score FROM Movie m JOIN Review r ON r.movieId = m.movieId AND r.userId = ?;
+
+--This query gets the movie information for the movies the user saved
+--Page: http://localhost:8081/saved
+SELECT m.movieId, posterLink, title, year FROM Movie m JOIN Save s ON s.movieId = m.movieId AND s.userId = ?
+
+--This insert statement inserts the movie the user chose to save
+--Page: http://localhost:8081/movie/{movieId}
+INSERT INTO save VALUES (" + userId + "," + movieId + ");
+
+--This delete statement deletes the movie the user chooses to unsave
+--Page: http://localhost:8081/movie/{movieId}
+DELETE FROM save WHERE movieId = " + movieId + " AND userId = " + userId + ";

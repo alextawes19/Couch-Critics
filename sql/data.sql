@@ -1,0 +1,4 @@
+-- Extra Movies
+insert into Movie values(1001, "Ant-Man", "Armed with a super-suit with the astonishing ability to shrink in scale but increase in strength, cat burglar Scott Lang must embrace his inner hero and help his mentor, Dr. Hank Pym, pull off a plan that will save the world.", "", "117 min", "Action", "Peyton Reed");
+insert into Movie values(1002, "Little Big League", "A young boy is bequeathed the ownership of a professional baseball team.", "", "119", "Comedy", "Andrew Scheinman", 1994);
+insert into movie values(1003, "Gladiator II", "After his home is conquered by the tyrannical emperors who now lead Rome, Lucius is forced to enter the Colosseum and must look to his past to find strength to return the glory of Rome to its people.", "", "142 min", "Action Epic, Drama", "Ridley Scott", 2024);
