@@ -8,7 +8,9 @@ Alex Tawes:
 Evan Gavino:
      -
 Henry Grinberg:
-     -
+     - ddl.sql
+     - Single Movie page with reviews
+     - Reviews on the Singular movie page
 Austin Miller:
      - Authentication management
      - Login, Register pages, frontend and backend
