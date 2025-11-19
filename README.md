@@ -1,4 +1,10 @@
 # Couch Critics :movie_camera:
+Demo Link: https://youtu.be/L6zXgfgWZbE
+<img width="1481" height="679" alt="image" src="https://github.com/user-attachments/assets/b9777941-1f0b-422a-b6df-ea7512d21d18" />
+<img width="1483" height="678" alt="image" src="https://github.com/user-attachments/assets/f0bea990-c08f-4896-894e-ec68ca781996" />
+<img width="1482" height="678" alt="image" src="https://github.com/user-attachments/assets/1168810e-ab54-4b04-83a0-fd422b79bda5" />
+
+
 
 ## Description
 Couch Critics is a web app which allows users to search IMDb's top 1000 movies and leave reviews, as well as comment on individual reviews.
