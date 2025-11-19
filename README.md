@@ -1,4 +1,4 @@
-# Couch Critics
+# Couch Critics :movie_camera:
 
 ## Description
 Couch Critics is a web app which allows users to search IMDb's top 1000 movies and leave reviews, as well as comment on individual reviews.
